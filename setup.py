@@ -6,4 +6,7 @@ setup(name='processcheck',
       url='',
       author='Dallas Lewis',
       packages=['processcheck'],
+      install_requires=[
+            'psutil'
+      ],
       zip_safe=False)

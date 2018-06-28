@@ -1,5 +1,9 @@
 def topProcess(numOfProcesses):
-    import psutil
+    try:
+        import psutil
+        print('psutil found')
+    except ImportError:
+        raise RuntimeError('psutil missing!')
     from pprint import pprint as pp
 
     #using pretty print to organize to data; also sorts processes based on size: biggest first, smallest last
