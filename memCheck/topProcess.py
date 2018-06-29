@@ -4,7 +4,7 @@ def topProcess(numOfProcesses):
 
     ad_pids = []
     procs = []
-    dic = {}
+    procDic = {}
     for p in psutil.process_iter():
         with p.oneshot():
             try:
@@ -22,9 +22,7 @@ def topProcess(numOfProcesses):
                 procs.append(p)
     procs.sort(key=lambda p: p._uss, reverse=True)
     for p in procs[:numOfProcesses]:
-        print(p._info['name'] + "(" + str(p.pid) + "): {0:.2f}".format(p._uss / 1024 / 1024) + " MB")
+        procDic[p._info['name']  +  "(" + str(p.pid) + ")"] = "{0:.2f}".format(p._uss / 1024 / 1024) + " MB"
     if ad_pids:
         print("warning: access denied for %s pids" % (len(ad_pids)),file=sys.stderr)
-
-    input("woah there")
-    
+    return procDic
