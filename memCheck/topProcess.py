@@ -1,8 +1,10 @@
 def topProcess(numOfProcesses):
     import psutil
+    import sys
 
     ad_pids = []
     procs = []
+    dic = {}
     for p in psutil.process_iter():
         with p.oneshot():
             try:
@@ -22,5 +24,7 @@ def topProcess(numOfProcesses):
     for p in procs[:numOfProcesses]:
         print(p._info['name'] + "(" + str(p.pid) + "): {0:.2f}".format(p._uss / 1024 / 1024) + " MB")
     if ad_pids:
-        print("warning: access denied for %s pids" % (len(ad_pids)),
-            file=sys.stderr)
+        print("warning: access denied for %s pids" % (len(ad_pids)),file=sys.stderr)
+
+    input("woah there")
+    
